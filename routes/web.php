@@ -36,4 +36,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('admin/user/update', [App\Http\Controllers\admin\UserController::class, 'update'])->name('admin.user.update');
     Route::post('admin/user/destroy', [App\Http\Controllers\admin\UserController::class, 'destroy'])->name('admin.user.destroy');
     Route::post('admin/user/change_status', [App\Http\Controllers\admin\UserController::class, 'change_status'])->name('admin.user.change_status');
+
+    Route::resource('admin/task', App\Http\Controllers\admin\TaskController::class);
+    Route::get('admin/task/edit/{id}', [App\Http\Controllers\admin\TaskController::class, 'edit'])->name('admin.task.edit');
+    Route::post('admin/task/update', [App\Http\Controllers\admin\TaskController::class, 'update'])->name('admin.task.update');
+    Route::post('admin/task/destroy', [App\Http\Controllers\admin\TaskController::class, 'destroy'])->name('admin.task.destroy');
+    Route::post('admin/task/change_status', [App\Http\Controllers\admin\TaskController::class, 'change_status'])->name('admin.task.change_status');
 });

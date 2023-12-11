@@ -20,7 +20,7 @@ class UserController extends Controller
     {
         if ($request->ajax()) {
             // get records of user role
-            $user = User::where('is_deleted',0)->orderBy('id', 'desc')->role('user')->get();
+            $user = User::where('is_deleted',0)->orderBy('id', 'desc')->get();
             return Datatables::of($user)
                         ->addIndexColumn()
                         ->addColumn('status', function($row) {
@@ -80,7 +80,6 @@ class UserController extends Controller
         $input['password'] = bcrypt($request->password);
         $input['created_on'] = time();
         $user = User::create($input);
-        $user->assignRole('user');
         return redirect()->route('user.index')->with('success','User created successfully');
     }
 

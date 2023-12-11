@@ -19,7 +19,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            // get records of user role
+            
             $user = User::where('is_deleted',0)->orderBy('id', 'desc')->get();
             return Datatables::of($user)
                         ->addIndexColumn()

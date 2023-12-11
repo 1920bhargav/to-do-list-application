@@ -36,9 +36,7 @@
                                 <strong>{{ $message }}</strong></div>
                             @endif
                             <span class="card-title" style="font-size: 25px;">Task List</span>
-                            {{-- <a href="{{route('task.create')}}" id="create-new-category" class="btn btn-sm btn-primary btn-theme waves-effect waves-light float-right" data-target="#addTaskModal">
-                                <i class="mdi mdi-plus-circle"></i> Add Task
-                            </a> --}}
+                           
 
                             <a href="#" id="create-new-category" class="btn btn-sm btn-primary btn-theme waves-effect waves-light float-right" data-toggle="modal" data-target="#addTaskModal">
                                 <i class="mdi mdi-plus-circle"></i> Add Task
@@ -65,9 +63,13 @@
     </div>
 </div>
 
+
 <div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog" aria-labelledby="addTaskModalLabel" aria-hidden="true">
-    
-            <div class="container">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!-- Here, load the edit form content dynamically using JavaScript -->
+            
+                <div class="container">
                     <div class="layout-px-spacing">
                         <div class="row">
                             <div class="col-md-12">
@@ -123,55 +125,45 @@
                             </div>        
                         </div>
                     </div>
+            
             </div>
-        
+        </div>
+    </div>
 </div>
 
 @endsection
 
 @section('page_scripts')
+
 <script>
-    $(document).ready(function(){
-        $('#cancelBtn').on('click', function() {
-            $('#addTaskModal').removeClass('show');
-            // Assuming 'taskTable' is the ID of your data table
-            var oTable = $('#taskTable').DataTable(); // Use DataTable() instead of dataTable()
+        $(document).ready(function(){
+            $('#cancelBtn').on('click', function() {
+                $('#addTaskModal').modal('hide'); // Hide the modal
+                $('#taskTable').DataTable().ajax.reload(); // Reload the DataTable
+            });
 
-            // Reload the DataTable without refreshing the entire page
-            oTable.ajax.reload(null, false); // 'false' to prevent page refresh
+            $('#createTask').on('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    method: 'POST',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        $('#addTaskModal').modal('hide'); // Hide the modal
+                        $('#taskTable').DataTable().ajax.reload(); // Reload the DataTable
+
+                        // Additional actions based on the response
+                    },
+                    error: function(error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
         });
-    });
-</script>
-<script>
-    $(document).ready(function(){
-    $('#createTask').on('submit', function(event) {
-        event.preventDefault(); // Prevent the default form submission
+    </script>
 
-        // AJAX request to submit form data
-        $.ajax({
-            url: $(this).attr('action'),
-            method: 'POST',
-            data: $(this).serialize(),
-            success: function(response) {
-                $('#addTaskModal').removeClass('show');
-                $('#addTaskModal').css('display', 'none'); // Hide the modal upon successful submission
-                // Assuming 'taskTable' is the ID of your data table
-                var oTable = $('#taskTable').DataTable(); // Use DataTable() instead of dataTable()
 
-                // Reload the DataTable without refreshing the entire page
-                oTable.ajax.reload(null, false); // 'false' to prevent page refresh
-
-                // Additional actions based on the response
-            },
-            error: function(error) {
-                // Handle error
-                console.error('Error:', error);
-            }
-        });
-    });
-});
-
-</script>
 
     <script type="text/javascript">
         var ajax_url = "{{ route('task.index') }}";

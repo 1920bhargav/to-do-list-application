@@ -10,7 +10,14 @@ $(function () {
             },
             processing: true,
             serverSide: true,
-            ajax: ajax_url,
+            aaSorting: [],
+            ajax: {
+
+                ajax: ajax_url,
+                data: function (d) { 
+                  d.status_list = $('.success_list').val();
+                }
+            },
             columns: [
                 {data: 'title', name: "title"},
                 {data: 'description', name: 'description'},
@@ -19,6 +26,11 @@ $(function () {
             ]
         });
     }
+    $('.success_list').css('cursor','pointer');
+    $(document).on('click','.success_list',function(event) { 
+        event.preventDefault();
+        table.ajax.reload();
+    });
 
     $("#createTask").validate({
         rules: {
@@ -88,10 +100,8 @@ $(function () {
 		}
     });
 
-    $('#profile_picture').on('change',function() {
-        $('#profile_picture_preview').parent().removeClass('d-none');
-        readURL(this,'#profile_picture_preview');
-    });
+    $('.dt--top-section').before($('.filter_div'));
+    $('.filter_div').removeClass('d-none');
 
     var user_id;
     $(document).on('click', '.delete', function() {

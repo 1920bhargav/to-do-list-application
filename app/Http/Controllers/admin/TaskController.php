@@ -11,19 +11,44 @@ class TaskController extends Controller
 {
     public function index(Request $request)
     {
+
+        if($request->has('status_list') && !empty($request->status_list)) {
+            $status_i = $request->status_list;
+        }  else {
+            $status_i = '';
+        }
         if ($request->ajax()) {
-            
-            $user = Task::orderBy('id', 'desc')->get();
+
+            if ($status_i == 1) {
+                $user = Task::where('status', "Completed")->get();
+            } else {
+                $user = Task::orderBy('id', 'desc')->get();
+            }
+
             return Datatables::of($user)
                         ->addIndexColumn()
                         ->addColumn('status', function($row) {
-                            $active = ($row->active == 1) ? 'checked' : '';
-                            $switch = '<label class="switch s-primary mr-2">
-                                            <input type="checkbox" class="status" id="status_'.$row->id.'" data-user_id='.$row->id.' data-status='.$row->active.' '.$active.'>
-                                            <span class="slider round"></span>
-                                        </label>';
-                            return $switch;
+                            $status = $row->status;
+                            $badgeClass = '';
+                        
+                            switch ($status) {
+                                case 'In-progress':
+                                    $badgeClass = 'badge badge-primary';
+                                    break;
+                                case 'Pending':
+                                    $badgeClass = 'badge badge-warning';
+                                    break;
+                                case 'Completed':
+                                    $badgeClass = 'badge badge-success';
+                                    break;
+                                default:
+                                    $badgeClass = 'badge badge-secondary';
+                                    break;
+                            }
+                        
+                            return '<span class="' . $badgeClass . '">' . $status . '</span>';
                         })
+                        
                         ->addColumn('action', function($row) {
                             $user_edit_route = route('admin.user.edit',$row->id);
                             $btn = "<a href='$user_edit_route' class='edit btn btn-outline-primary'>Edit</a> 

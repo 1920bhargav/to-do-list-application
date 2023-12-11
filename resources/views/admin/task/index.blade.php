@@ -11,6 +11,16 @@
 <div class="layout-px-spacing">
     <div class="row layout-top-spacing">
         <div class="container-fluid">
+            <div class="filter_div d-none">
+                <div class="row">
+                <div class="col-4">
+                    <select class="form-control success_list" id="success_list" >
+                            <option value="1">Completed</option>
+                            <option value="">All</option>
+                        </select> 
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-12">
                     <div class="card">

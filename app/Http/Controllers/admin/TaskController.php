@@ -50,7 +50,7 @@ class TaskController extends Controller
                         })
                         
                         ->addColumn('action', function($row) {
-                            $user_edit_route = route('admin.user.edit',$row->id);
+                            $user_edit_route = route('admin.task.edit',$row->id);
                             $btn = "<a href='$user_edit_route' class='edit btn btn-outline-primary'>Edit</a> 
                             <a href='javascript:void(0)' class='delete btn btn-outline-danger' data-user_id=".$row->id.">Delete</a>";
                             return $btn;
@@ -80,6 +80,28 @@ class TaskController extends Controller
             'success' => true,
             'message' => 'Task created successfully',
         ], 200);
+    }
+
+    public function edit($id)
+    {
+        $user_data = Task::where('id', $id)->first();
+        return view('admin.task.edit', compact('user_data'));
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+            'status'=>'required',
+            'description'=>'required',
+        ]);
+        $update_data = [
+            'title' => $request->title,
+            'status' => $request->status,
+            'description' => $request->description,
+        ];
+        Task::where('id', $request->user_id)->update($update_data);
+        return redirect()->route('task.index')->with('success','Task updated successfully');
     }
 
     public function destroy(Request $request)

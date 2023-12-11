@@ -31,9 +31,9 @@
                                             <label>Status</label>
                                             <select name="status"
                                                 id="status" class="form-control ">
-                                                <option value="Pending">Pending</option>
-                                                <option value="In-progress">In-progress</option>
-                                                <option value="Completed">Completed</option>
+                                                <option value="Pending"  {{  $user_data->status == 'Pending' ? 'selected' : '' }}>Pending</option>
+                                                <option value="In-progress" {{  $user_data->status == 'In-progress' ? 'selected' : '' }}>In-progress</option>
+                                                <option value="Completed" {{  $user_data->status == 'Completed' ? 'selected' : '' }}>Completed</option>
                                             </select>
                                         </div>
                                     </div>
@@ -42,14 +42,14 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Description</label>
-                                            <textarea name="description" id="description" value="{{ $user_data->description }}" class="form-control">{{ $user_data->address }}</textarea>
+                                            <textarea name="description" id="description" value="{{ $user_data->description }}" class="form-control">{{ $user_data->description }}</textarea>
                                             <span class="text-danger">{{ $errors->first('description') }}</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-footer mt-3">
                                     <button type="submit" class="btn btn-fill btn-outline-primary">Submit</button>
-                                    <a href="{{ route('user.index')}}" class="btn btn-outline-danger">Cancel</a>
+                                    <a href="{{ route('task.index')}}" class="btn btn-outline-danger">Cancel</a>
                                 </div>
                             </form>
                         </div>
@@ -64,5 +64,5 @@
 <script>
     var ajax_url = null;
 </script>
-<script src="{{asset('assets/js/pages/users.js')}}"></script>
+<script src="{{asset('assets/js/pages/task.js')}}"></script>
 @endsection

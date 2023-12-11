@@ -122,7 +122,7 @@ $(function () {
                                         type: 'green',
                                         buttons: {
                                             ok: function () {
-                                                var oTable = $('#userTable').dataTable();
+                                                var oTable = $('#taskTable').dataTable();
                                                 oTable.fnDraw(false);
                                             }
                                         }

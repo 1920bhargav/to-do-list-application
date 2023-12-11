@@ -40,4 +40,30 @@ class TaskController extends Controller
     {
         return view('admin.task.create');
     }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+            'status'=>'required',
+            'description'=>'required',
+        ]);
+        
+        $input = $request->all();
+        $task = Task::create($input);
+        return response()->json([
+            'success' => true,
+            'message' => 'Task created successfully',
+        ], 200);
+    }
+
+    public function destroy(Request $request)
+    {
+        $delete = Task::where('id', $request->user_id)->delete();
+        if ($delete) {
+            return response()->json(['message'=> "Task Deleted successfully.", 'status' => 1]);
+        } else {
+            return response()->json(['message'=> "Task not deleted.", 'status' => 0]);
+        }
+    }
 }

@@ -1,0 +1,101 @@
+.navbar {
+    background: linear-gradient(#e74367, #ae4578);
+    /* background: #ffffff; */
+}
+
+.header-container .navbar-nav.theme-brand {
+    background-image: linear-gradient(#e74367, #ae4578) !important;
+    /* background: #ffffff; */
+    border-right: 1px solid #e5e2e3  !important;
+}
+
+.navbar .navbar-item .nav-item .form-inline.search .search-form-control{
+    border: 1px solid #ffffff;
+    background: #f6f6f6;
+}
+
+.btn-theme {
+    border-color: #b64267;
+    background: linear-gradient(#e74367, #ae4578);
+}
+
+.btn-theme:hover {
+    border-color: #b64267;
+}
+
+.btn-theme:not(:disabled):not(.disabled):active {
+    border-color: #b64267;
+}
+
+#sidebar ul.menu-categories li.menu.active > .dropdown-toggle {
+    background: linear-gradient(#e74367, #ae4578);
+}
+
+.header-container .navbar-nav.theme-brand .theme-logo img {
+    width: 120px;
+}
+
+.page-item.active .page-link{
+    background: linear-gradient(#e74367, #ae4578) !important;
+}
+
+div.dataTables_wrapper div.dataTables_info{
+    color: #c576a6 !important;
+}
+
+.growl.growl-default {
+    background: #2bae35 !important;
+    margin-top: 30% !important;
+}
+
+.switch.s-primary input:checked + .slider {
+    background: linear-gradient(#e74367, #ae4578) !important;
+}
+
+.switch.s-primary .slider:before {
+    background: white !important;
+}
+
+.notification_count {
+    top: 14px !important;
+    right: -2px !important;
+    width: 15px !important;
+    height: 16px !important;
+}
+
+.count {
+    margin-top: -3px;
+    color: #ffffff;
+}
+
+.form-control.is-invalid {
+    background-image: none !important;
+}
+
+.incentive-image {
+    height:145px;
+}
+
+.navbar .navbar-item .nav-item.dropdown.notification-dropdown .dropdown-menu {
+    min-width: 30rem !important;
+}
+
+.navbar .navbar-item .nav-item.dropdown.notification-dropdown .nav-link svg {
+    color: #ffffff !important;
+}
+
+.navbar .navbar-item .nav-item.user-profile-dropdown .nav-link svg {
+    color: #ffffff !important;
+}
+
+.header-container .sidebarCollapse svg {
+    color: #ffffff !important;
+}
+
+.header-container .navbar-nav.theme-brand .theme-logo img {
+    height: 67px !important;
+}
+
+.navbar-logo {
+    padding-bottom: 20%;
+}
